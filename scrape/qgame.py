@@ -35,7 +35,7 @@ class Game:
     # 2) The absolute point margin (excluding snitch catches)
     #     was less than or equal to 30
     # IF a game is not in snitch range it is considered to be "out of range" or "OSR"
-    
+
     def is_isr(self):
         if(self.sd or self.ot):
             return True
@@ -50,7 +50,7 @@ class Game:
     #   ! - Sudden Death Snitch catch
     # So a quidditch score reports the score as 160*^-100
     # This method obtains the non-snitch catch points and the number of catches
-    
+
     def get_qp(score_string):
         temp = score_string
         grabs = 0
@@ -70,16 +70,16 @@ class Game:
         return mens[0]*3600+mens[1]*60+mens[2] if len(mens)==3 else mens[0]*60+mens[1]
     def is_valid(self):
         if self.wscore<=self.lscore:
-            print('Winning Score must be greater than losing score')
+            #print('Winning Score must be greater than losing score')
             return False
         elif self.gtime <=1080:
-            print('Game time under 18 minutes not possible')
+            #print('Game time under 18 minutes not possible')
             return False
         elif self.rtcatch ==-1:
-            print('No regular time catch reported')
+            #print('No regular time catch reported')
             return False
         elif self.sdcatch ==-1:
-            print('Improperly notated SD catch')
+            #print('Improperly notated SD catch')
             return False
         else:
             return True
@@ -104,6 +104,8 @@ class Game:
         else:
             period = 'SD'
         return period
+    def get_date(self):
+        return self.gdate
     def get_id(self):
         game_id = str(self.wscore)+'-'+str(self.lscore)
         game_id = game_id + self.get_period()

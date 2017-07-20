@@ -21,8 +21,9 @@ def is_int(s):
 def recursive_scan(name,db,table):
     URLPREFIX = 'https://www.usquidditch.org/team/'
     tag = name[len(name)-2:]
+    url = URLPREFIX+name+'/pastGames'
     if(is_int(tag)):
-        url = URLPREFIX+name+'/pastGames'
+
         #Scan this version
         st.scan(url,db,table)
         # If the tag is not -1, the next version is found by adding 1 to the tag
@@ -31,11 +32,11 @@ def recursive_scan(name,db,table):
             recursive_scan(name[:len(name)-2]+str(int(tag)+1),db,table)
         # If the tag is -1, the next version is found by deleting the tag:
         # i.e 'texas-cavalry-1' -> 'texas-cavalry'
-		else:
+        else:
             recursive_scan(name[:len(name)-2],db,table)
     else:
         st.scan(url,db,table)
-	
+
 # Start the crawler here.
 DATABASE = 'quidditch'
 TABLE = 'games'
